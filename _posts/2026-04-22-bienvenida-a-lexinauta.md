@@ -16,7 +16,7 @@ Cuando escribís con Markdown normal (`##`, `>`, imágenes), el diseño del post
 
 > Perfection is boring. Structural honesty is engaging.
 
-![Arquitectura brutalista](/assets/images/posts/bienvenida/cover.png)
+![Arquitectura brutalista]({{ '/assets/images/posts/bienvenida/cover.png' | relative_url }})
 
 Los borradores van en `_drafts/` (sin fecha en el nombre del archivo). Para verlos en local:
 

@@ -6,9 +6,15 @@ intro: "Notas, ideas y cosas que voy descubriendo"
 encoding: utf-8
 lang: es
 
-# URL del sitio en producción (ajusta si usas usuario.github.io o proyecto en subruta)
-url: "https://TU-USUARIO.github.io"
-baseurl: ""
+# URL canónica del sitio (sin barra final).
+# Proyecto en GitHub Pages: usuario + repo en baseurl.
+url: "https://14tinchov.github.io"
+baseurl: "/lexinauta"
+#
+# Cuando uses dominio propio en GitHub (sitio en la raíz del host), cambia a:
+#   url: "https://www.lexinauta.com"
+#   baseurl: ""
+# Luego vuelve a desplegar; las plantillas con `relative_url` / `absolute_url` seguirán bien.
 
 markdown: kramdown
 kramdown:
