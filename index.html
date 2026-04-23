@@ -1,0 +1,94 @@
+---
+layout: default
+title: Inicio
+---
+
+<div class="listing">
+  <section class="listing__hero" aria-label="Presentación">
+    <h1 class="listing__title">{{ site.tagline | default: site.title }}</h1>
+    {% if site.intro %}
+      <p class="listing__intro">{{ site.intro }}</p>
+    {% endif %}
+    <div class="listing__rule" aria-hidden="true"></div>
+  </section>
+
+  {% assign featured = paginator.posts | first %}
+  {% if featured %}
+  <section class="hero-featured" aria-label="Entrada destacada">
+    <div class="hero-featured__grid">
+      <article class="hero-featured__text-box">
+        <span class="listing__hero-sticker">Destacado</span>
+        <h2 class="hero-featured__title"><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h2>
+        {% if featured.excerpt %}
+          <div class="hero-featured__excerpt">{{ featured.excerpt }}</div>
+        {% endif %}
+        <a class="hero-featured__cta" href="{{ featured.url | relative_url }}">Leer entrada →</a>
+      </article>
+
+      <figure class="hero-featured__media-box">
+        {% if featured.featured_image %}
+          <img class="hero-featured__media-img" src="{{ featured.featured_image | relative_url }}" alt="{{ featured.featured_image_alt | default: featured.title }}">
+        {% else %}
+          <div class="hero-featured__media hero-featured__media--fallback" aria-hidden="true"></div>
+        {% endif %}
+      </figure>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="stories" aria-label="Publicaciones recientes">
+    <h2 class="stories__title">Publicaciones recientes</h2>
+    <div class="post-grid">
+    {% assign has_secondary_posts = paginator.posts.size | minus: 1 %}
+    {% if has_secondary_posts > 0 %}
+      {% for post in paginator.posts offset:1 %}
+      <article class="post-card">
+        <div class="post-card__media">
+          {% if post.categories.size > 0 %}
+            <span class="post-card__chip{% cycle '', ' post-card__chip--accent' %}">{{ post.categories | first }}</span>
+          {% endif %}
+          {% if post.featured_image %}
+            <img class="post-card__image" src="{{ post.featured_image | relative_url }}" alt="{{ post.featured_image_alt | default: post.title }}">
+          {% endif %}
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%m/%Y" }}</time>
+          </div>
+          <h2 class="post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          {% if post.excerpt %}
+            <div class="post-card__excerpt">{{ post.excerpt }}</div>
+          {% endif %}
+          <a class="post-card__read" href="{{ post.url | relative_url }}">Leer más →</a>
+        </div>
+      </article>
+      {% endfor %}
+    {% else %}
+      {% for post in paginator.posts %}
+      <article class="post-card">
+        <div class="post-card__media">
+          {% if post.categories.size > 0 %}
+            <span class="post-card__chip{% cycle '', ' post-card__chip--accent' %}">{{ post.categories | first }}</span>
+          {% endif %}
+          {% if post.featured_image %}
+            <img class="post-card__image" src="{{ post.featured_image | relative_url }}" alt="{{ post.featured_image_alt | default: post.title }}">
+          {% endif %}
+        </div>
+        <div class="post-card__body">
+          <div class="post-card__meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%m/%Y" }}</time>
+          </div>
+          <h2 class="post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          {% if post.excerpt %}
+            <div class="post-card__excerpt">{{ post.excerpt }}</div>
+          {% endif %}
+          <a class="post-card__read" href="{{ post.url | relative_url }}">Leer más →</a>
+        </div>
+      </article>
+      {% endfor %}
+    {% endif %}
+    </div>
+  </section>
+
+  {% include pagination.html %}
+</div>

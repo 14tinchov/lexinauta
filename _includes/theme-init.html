@@ -1,0 +1,29 @@
+<script>
+(function () {
+  var T = ["theme-electric", "theme-cyber", "theme-construct", "theme-swiss"];
+  var KEY = "lex:last-theme";
+  var last = null;
+  try { last = sessionStorage.getItem(KEY); } catch (e) {}
+  var pool = T.filter(function (t) { return t !== last; });
+  if (pool.length === 0) pool = T;
+  var pick = pool[Math.floor(Math.random() * pool.length)];
+  document.documentElement.classList.add(pick);
+  try { sessionStorage.setItem(KEY, pick); } catch (e) {}
+  window.__lex = {
+    themes: T,
+    cycle: function () {
+      var cur = "";
+      for (var j = 0; j < T.length; j++) {
+        if (document.documentElement.classList.contains(T[j])) {
+          cur = T[j];
+          break;
+        }
+      }
+      var i = (T.indexOf(cur) + 1) % T.length;
+      T.forEach(function (t) { document.documentElement.classList.remove(t); });
+      document.documentElement.classList.add(T[i]);
+      try { sessionStorage.setItem(KEY, T[i]); } catch (e2) {}
+    }
+  };
+})();
+</script>

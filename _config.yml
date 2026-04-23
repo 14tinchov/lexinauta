@@ -1,0 +1,34 @@
+# lexinauta — Jekyll para GitHub Pages (español, UTF-8)
+title: lexinauta
+description: "Blog personal"
+tagline: "Pensando en voz alta"
+intro: "Notas, ideas y cosas que voy descubriendo"
+encoding: utf-8
+lang: es
+
+# URL del sitio en producción (ajusta si usas usuario.github.io o proyecto en subruta)
+url: "https://TU-USUARIO.github.io"
+baseurl: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+permalink: /:year/:month/:day/:title/
+
+plugins:
+  - jekyll-paginate
+
+paginate: 5
+paginate_path: "/pagina/:num/"
+
+# Comentarios: crea un sitio en https://disqus.com y pega aquí el "shortname"
+disqus_shortname: ""
+
+author:
+  name: "Martin Villalba"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - ideas

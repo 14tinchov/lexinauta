@@ -1,0 +1,75 @@
+---
+layout: default
+---
+<article class="post post--article">
+  <header class="post-hero">
+    <div class="post-hero__head">
+      {% if page.categories.size > 0 %}
+        <span class="post-chip">{{ page.categories | first }}</span>
+      {% endif %}
+      <h1 class="post-title">{{ page.title }}</h1>
+      <div class="post-header__byline">
+        <span class="post-header__author-name">{{ site.author.name }}</span>
+        <span class="post-header__dot" aria-hidden="true"></span>
+        <time class="post-header__date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d/%m/%Y" }}</time>
+      </div>
+    </div>
+
+    {% if page.featured_image %}
+      <figure class="post-hero__media">
+        <img src="{{ page.featured_image | relative_url }}" alt="{{ page.featured_image_alt | default: page.title }}">
+      </figure>
+    {% else %}
+      <div class="post-hero__media post-hero__media--fallback" aria-hidden="true"></div>
+    {% endif %}
+  </header>
+
+  {% assign share_url = page.url | absolute_url %}
+  {% assign share_title = page.title | uri_escape %}
+  {% assign share_url_escaped = share_url | uri_escape %}
+
+  <div class="post-body-grid">
+    <aside class="post-share" aria-label="Compartir">
+      <h2 class="post-share__title">Compartir</h2>
+      <a class="post-share__link" href="https://twitter.com/intent/tweet?text={{ share_title }}&url={{ share_url_escaped }}" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+      <a class="post-share__link" href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url_escaped }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="post-share__link" href="#comentarios">Comentarios</a>
+    </aside>
+
+    <div class="post-main">
+      <div class="post-content">
+        {{ content }}
+      </div>
+
+      {% assign _disqus = site.disqus_shortname | strip %}
+      {% if _disqus != "" and page.comments != false %}
+        {% include disqus.html %}
+      {% endif %}
+    </div>
+  </div>
+
+  {% assign related_posts = site.posts | where_exp: "item", "item.url != page.url" %}
+  {% if related_posts.size > 0 %}
+  <section class="related-posts" aria-label="Más publicaciones">
+    <h2 class="related-posts__title">Más publicaciones</h2>
+    <div class="related-posts__grid">
+      {% for post in related_posts limit:3 %}
+      <article class="related-post-card">
+        <div class="related-post-card__media">
+          {% if post.categories.size > 0 %}
+            <span class="related-post-card__chip">{{ post.categories | first }}</span>
+          {% endif %}
+          {% if post.featured_image %}
+            <img class="related-post-card__image" src="{{ post.featured_image | relative_url }}" alt="{{ post.featured_image_alt | default: post.title }}">
+          {% endif %}
+        </div>
+        <div class="related-post-card__body">
+          <h3 class="related-post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <a class="related-post-card__read" href="{{ post.url | relative_url }}">Leer post →</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</article>
