@@ -4,7 +4,7 @@ title: "Bienvenida a lexinauta"
 subtitle: "Un arranque mínimo para el blog: borradores, UTF-8 y GitHub Pages."
 categories:
   - meta
-featured_image: "/assets/images/posts/bienvenida/cover.png"
+featured_image: "/assets/images/posts/bienvenida/1.webp"
 featured_image_alt: "Arquitectura brutalista en blanco y negro"
 ---
 
@@ -16,7 +16,7 @@ Cuando escribís con Markdown normal (`##`, `>`, imágenes), el diseño del post
 
 > Perfection is boring. Structural honesty is engaging.
 
-![Arquitectura brutalista]({{ '/assets/images/posts/bienvenida/cover.png' | relative_url }})
+![Arquitectura brutalista]({{ '/assets/images/posts/bienvenida/1.webp' | relative_url }})
 
 Los borradores van en `_drafts/` (sin fecha en el nombre del archivo). Para verlos en local:
 

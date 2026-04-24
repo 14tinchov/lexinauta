@@ -8,8 +8,8 @@ lang: es
 
 # URL canónica del sitio (sin barra final).
 # Proyecto en GitHub Pages: usuario + repo en baseurl.
-url: "https://14tinchov.github.io"
-baseurl: "/lexinauta"
+url: "https://lexinauta.com"
+baseurl: ""
 #
 # Cuando uses dominio propio en GitHub (sitio en la raíz del host), cambia a:
 #   url: "https://www.lexinauta.com"
