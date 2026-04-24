@@ -833,6 +833,25 @@ body.site-body {
   box-shadow: 2px 2px 0 0 var(--fg);
 }
 
+.post-share__link--action {
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* —— Prose —— */
 .post-content {
   font-size: 1.125rem;
@@ -902,10 +921,71 @@ body.site-body {
   margin: 0;
 }
 
-.post-content ul,
+.post-content ul {
+  margin: 0 0 1.25rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.post-content ul > li {
+  position: relative;
+  margin: 0 0 0.65rem;
+  padding-left: 1.65rem;
+}
+
+.post-content ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--bg);
+  border: var(--border-thin);
+  box-shadow: 3px 3px 0 0 var(--fg);
+}
+
+.post-content ul ul {
+  margin: 0.5rem 0 0;
+  padding-left: 0.5rem;
+}
+
 .post-content ol {
   margin: 0 0 1.25rem;
-  padding-left: 1.35rem;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: post-ol;
+}
+
+.post-content ol > li {
+  position: relative;
+  margin: 0 0 0.65rem;
+  padding-left: 2.35rem;
+  counter-increment: post-ol;
+}
+
+.post-content ol > li::before {
+  content: counter(post-ol);
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  min-width: 1.5rem;
+  padding: 0.15rem 0.35rem;
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--fg);
+  background: var(--bg);
+  border: var(--border-thin);
+  box-shadow: var(--shadow-sm);
+}
+
+.post-content ol ol {
+  margin: 0.5rem 0 0;
+  padding-left: 0.5rem;
+  counter-reset: post-ol;
 }
 
 .post-content pre,

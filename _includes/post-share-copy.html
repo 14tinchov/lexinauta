@@ -1,0 +1,52 @@
+<button type="button" class="post-share__link post-share__link--action" data-share-url="{{ share_url }}" id="post-share-copy-btn">Copiar link</button>
+<span class="visually-hidden" id="post-share-copy-live" aria-live="polite"></span>
+<script>
+(function () {
+  var btn = document.getElementById('post-share-copy-btn');
+  var live = document.getElementById('post-share-copy-live');
+  if (!btn) return;
+  var original = btn.textContent.trim();
+  var timer = null;
+  function announce(msg) {
+    if (live) live.textContent = msg || '';
+  }
+  function copyFallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try {
+      ok = document.execCommand('copy');
+    } finally {
+      document.body.removeChild(ta);
+    }
+    return ok;
+  }
+  btn.addEventListener('click', function () {
+    var url = btn.getAttribute('data-share-url') || '';
+    function finish(ok) {
+      if (timer) clearTimeout(timer);
+      btn.textContent = ok ? 'Copiado' : original;
+      announce(ok ? 'Enlace copiado al portapapeles' : '');
+      timer = setTimeout(function () {
+        btn.textContent = original;
+        announce('');
+        timer = null;
+      }, 2500);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () {
+        finish(true);
+      }).catch(function () {
+        finish(copyFallback(url));
+      });
+    } else {
+      finish(copyFallback(url));
+    }
+  });
+})();
+</script>

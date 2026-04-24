@@ -32,8 +32,7 @@ layout: default
     <aside class="post-share" aria-label="Compartir">
       <h2 class="post-share__title">Compartir</h2>
       <a class="post-share__link" href="https://twitter.com/intent/tweet?text={{ share_title }}&url={{ share_url_escaped }}" target="_blank" rel="noopener noreferrer">Twitter / X</a>
-      <a class="post-share__link" href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url_escaped }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a class="post-share__link" href="#comentarios">Comentarios</a>
+      {% include post-share-copy.html %}
     </aside>
 
     <div class="post-main">
@@ -42,7 +41,7 @@ layout: default
       </div>
 
       {% assign _disqus = site.disqus_shortname | strip %}
-      {% if _disqus != "" and page.comments != false %}
+      {% if site.comments_enabled and _disqus != "" and page.comments != false %}
         {% include disqus.html %}
       {% endif %}
     </div>

@@ -27,7 +27,9 @@ plugins:
 paginate: 5
 paginate_path: "/pagina/:num/"
 
-# Comentarios: crea un sitio en https://disqus.com y pega aquí el "shortname"
+# Comentarios: poné true cuando Disqus esté listo (y configurá shortname).
+comments_enabled: false
+# Creá un sitio en https://disqus.com y pegá el "shortname" aquí.
 disqus_shortname: ""
 
 author:
