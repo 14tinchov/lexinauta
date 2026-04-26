@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'es' }}">
 <head>
+  {% assign page_title = page.title | default: site.title %}
+  {% if page.title %}
+    {% assign meta_title = page.title | append: " · " | append: site.title %}
+  {% else %}
+    {% assign meta_title = site.title %}
+  {% endif %}
+  {% assign meta_description = page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace %}
+  {% if page.featured_image %}
+    {% assign meta_image = page.featured_image | absolute_url %}
+  {% else %}
+    {% assign meta_image = '/assets/images/me.webp' | absolute_url %}
+  {% endif %}
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{{ page.description | default: site.description }}">
+  <title>{{ meta_title }}</title>
+  <meta name="description" content="{{ meta_description }}">
+
+  <link id="site-favicon" rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg?v=2' | relative_url }}">
+  <link id="site-favicon-shortcut" rel="shortcut icon" href="{{ '/assets/favicon.svg?v=2' | relative_url }}">
+
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:locale" content="{{ site.lang | default: 'es_AR' }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ meta_title }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ meta_image }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ meta_title }}">
+  <meta name="twitter:description" content="{{ meta_description }}">
+  <meta name="twitter:image" content="{{ meta_image }}">
   {% include theme-init.html %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

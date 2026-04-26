@@ -1,13 +1,43 @@
 <script>
 (function () {
   var T = ["theme-electric", "theme-cyber", "theme-construct", "theme-swiss"];
+  var F = {
+    "theme-electric": "/assets/favicon-electric.svg",
+    "theme-cyber": "/assets/favicon-cyber.svg",
+    "theme-construct": "/assets/favicon-construct.svg",
+    "theme-swiss": "/assets/favicon-swiss.svg"
+  };
   var KEY = "lex:last-theme";
+  var V = "3";
+  function forceFavicon(rel, href) {
+    var sel = rel === "icon" ? 'link#site-favicon, link[rel="icon"]' : 'link#site-favicon-shortcut, link[rel="shortcut icon"]';
+    var current = document.querySelector(sel);
+    if (!current) {
+      current = document.createElement("link");
+      current.setAttribute("rel", rel);
+      if (rel === "icon") current.setAttribute("type", "image/svg+xml");
+      if (rel === "icon") current.id = "site-favicon";
+      if (rel === "shortcut icon") current.id = "site-favicon-shortcut";
+      document.head.appendChild(current);
+    }
+    var next = current.cloneNode(true);
+    next.setAttribute("href", href);
+    if (rel === "icon") next.setAttribute("type", "image/svg+xml");
+    if (current.parentNode) current.parentNode.replaceChild(next, current);
+  }
+  function updateFavicon(theme) {
+    var href = (F[theme] || "/assets/favicon.svg") + "?v=" + V + "&t=" + encodeURIComponent(theme || "default");
+    forceFavicon("icon", href);
+    forceFavicon("shortcut icon", href);
+  }
   var last = null;
   try { last = sessionStorage.getItem(KEY); } catch (e) {}
   var pool = T.filter(function (t) { return t !== last; });
   if (pool.length === 0) pool = T;
   var pick = pool[Math.floor(Math.random() * pool.length)];
   document.documentElement.classList.add(pick);
+  updateFavicon(pick);
+  setTimeout(function () { updateFavicon(pick); }, 0);
   try { sessionStorage.setItem(KEY, pick); } catch (e) {}
   window.__lex = {
     themes: T,
@@ -22,6 +52,7 @@
       var i = (T.indexOf(cur) + 1) % T.length;
       T.forEach(function (t) { document.documentElement.classList.remove(t); });
       document.documentElement.classList.add(T[i]);
+      updateFavicon(T[i]);
       try { sessionStorage.setItem(KEY, T[i]); } catch (e2) {}
     }
   };
