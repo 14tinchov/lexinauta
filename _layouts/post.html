@@ -27,12 +27,29 @@ layout: default
   {% assign share_url = page.url | absolute_url %}
   {% assign share_title = page.title | uri_escape %}
   {% assign share_url_escaped = share_url | uri_escape %}
+  {% assign about_page = site.pages | where: "permalink", "/about/" | first %}
+  {% assign about_image = about_page.about_image | default: "/assets/images/me.webp" %}
+  {% assign about_name = about_page.about_intro_title | default: site.author.name %}
 
   <div class="post-body-grid">
-    <aside class="post-share" aria-label="Compartir">
-      <h2 class="post-share__title">Compartir</h2>
-      <a class="post-share__link" href="https://twitter.com/intent/tweet?text={{ share_title }}&url={{ share_url_escaped }}" target="_blank" rel="noopener noreferrer">Twitter / X</a>
-      {% include post-share-copy.html %}
+    <aside class="post-aside" aria-label="Sobre el autor y compartir">
+      <section class="post-author-card" aria-label="Sobre Martin Villalba">
+        <figure class="post-author-card__media">
+          <img src="{{ about_image | relative_url }}" alt="{{ about_page.about_image_alt | default: about_name }}">
+        </figure>
+        <div class="post-author-card__body">
+          <h2 class="post-author-card__name">{{ about_name }}</h2>
+          <div class="post-author-card__text">
+            {{ about_page.content | markdownify }}
+          </div>
+        </div>
+      </section>
+
+      <section class="post-share" aria-label="Compartir">
+        <h2 class="post-share__title">Compartir</h2>
+        <a class="post-share__link" href="https://twitter.com/intent/tweet?text={{ share_title }}&url={{ share_url_escaped }}" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+        {% include post-share-copy.html %}
+      </section>
     </aside>
 
     <div class="post-main">

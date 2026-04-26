@@ -4,7 +4,7 @@ title: "Feliz coincidencia"
 subtitle: "Gracias por leer"
 categories:
   - Palabras
-featured_image: "/assets/images/posts/bienvenida/1.webp"
+featured_image: "/assets/images/posts/1/1.webp"
 featured_image_alt: "Yo, saltando en paracaidas con un amigo"
 ---
 
@@ -24,6 +24,6 @@ El término proviene del inglés *serendipity*, acuñado por Horace Walpole en 1
 - Tomar un camino no habitual y encontrarme con mi primera guitarra
 - Un viaje no planeado
 - Un curso que no tenías planeado hacer
-- Tu viejo poniendo un artista que no conocías
+- Mi viejo poniendo un artista que no conocías
 
 *Capaz no cambia el mundo, pero sí un poco el nuestro.*

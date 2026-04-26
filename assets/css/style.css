@@ -785,6 +785,70 @@ body.site-body {
   min-width: 0;
 }
 
+.post-aside {
+  display: grid;
+  gap: 1rem;
+}
+
+.post-author-card {
+  background: #fff;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+  transform: rotate(-1deg);
+  overflow: hidden;
+}
+
+.post-author-card__media {
+  margin: 0;
+  padding: 0.65rem;
+  border-bottom: var(--border-thick);
+  background: #fff;
+}
+
+.post-author-card__media::after {
+  content: "";
+  display: block;
+}
+
+.post-author-card__media img {
+  border: var(--border-thin);
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 24%;
+}
+
+.post-author-card__body {
+  background: var(--secondary);
+  color: var(--on-secondary);
+  padding: 0.8rem 0.75rem 0.85rem;
+}
+
+.post-author-card__name {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.42rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.post-author-card__text {
+  font-size: 0.86rem;
+  line-height: 1.35;
+  font-weight: 600;
+  max-width: 20ch;
+  color: var(--on-secondary);
+}
+
+.post-author-card__text p {
+  margin: 0;
+}
+
 .post-share {
   border: var(--border-thick);
   box-shadow: var(--shadow-md);
@@ -792,10 +856,12 @@ body.site-body {
   color: var(--on-secondary);
   padding: 1rem;
   min-width: 12rem;
+  margin-top: 0.8rem;
+  transform: rotate(0.8deg);
 }
 
 @media (min-width: 64rem) {
-  .post-share {
+  .post-aside {
     position: sticky;
     top: 7rem;
   }
@@ -834,7 +900,7 @@ body.site-body {
 .post-share__link--action {
   width: 100%;
   cursor: pointer;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -1136,6 +1202,122 @@ body.site-body {
   margin-bottom: 1.5rem;
 }
 
+/* —— About —— */
+.about {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 2.75rem var(--gutter) 0;
+}
+
+.about-hero {
+  margin: 0 0 2.2rem;
+}
+
+.about-hero__title {
+  display: inline-block;
+  margin: 0;
+  padding: 0.85rem 1.25rem 0.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 7.2vw, 4.35rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  background: #fff;
+  border: 5px solid var(--fg);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-2deg);
+}
+
+.about-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.65rem;
+  margin: 0 0 1.2rem;
+}
+
+.about-photo {
+  margin: 0;
+  background: #fff;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-1deg);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+.about-panel {
+  background: #fff;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-lg);
+  padding: 1.35rem;
+}
+
+.about-panel--lead {
+  background: var(--surface-container-lowest);
+  transform: translateY(0.25rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-panel--focus {
+  background: var(--secondary);
+  color: var(--on-secondary);
+  transform: rotate(-1deg);
+}
+
+.about-panel--side {
+  background: #ffd6e2;
+  color: var(--fg);
+  transform: rotate(1deg);
+}
+
+.about-panel__title {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3.2vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.about-panel__divider {
+  height: 5px;
+  margin: 0 0 0.9rem;
+  background: var(--fg);
+}
+
+.about-panel__text {
+  font-size: 1.02rem;
+  line-height: 1.62;
+}
+
+.about-panel__text > *:first-child {
+  margin-top: 0;
+}
+
+.about-panel__text > *:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 48rem) {
+  .about-top {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: stretch;
+    gap: 1.75rem;
+  }
+}
+
 /* —— Footer —— */
 .site-footer {
   margin-top: auto;
@@ -1201,4 +1383,17 @@ body.site-body {
 
 .site-footer__nav a:hover {
   border-bottom-color: currentColor;
+}
+
+.site-footer__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: none;
+}
+
+.site-footer__icon {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
 }

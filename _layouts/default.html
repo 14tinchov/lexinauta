@@ -19,7 +19,6 @@
       <a class="site-logo" href="{{ '/' | relative_url }}">{{ site.title }}</a>
       <nav class="site-nav" aria-label="Principal">
         <a class="site-nav__link{% if page.url == '/' or page.url contains '/pagina/' %} site-nav__link--active{% endif %}" href="{{ '/' | relative_url }}">Entradas</a>
-        <a class="site-nav__link{% if page.url contains '/about' %} site-nav__link--active{% endif %}" href="{{ '/about/' | relative_url }}">Sobre</a>
       </nav>
       <div class="site-header__actions">
         <button class="theme-switch" type="button" aria-label="Cambiar paleta de color" onclick="window.__lex.cycle()"><span aria-hidden="true">⟳</span> tema</button>
@@ -37,7 +36,11 @@
       <span class="site-footer__brand">{{ site.title }}</span>
       <span class="site-footer__meta">© {{ site.time | date: '%Y' }} {{ site.author.name }}</span>
       <nav class="site-footer__nav" aria-label="Pie">
-        <a href="{{ '/about/' | relative_url }}">Sobre</a>
+        <a class="site-footer__social" href="https://www.instagram.com/14tinchov/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Martin Villalba">
+          <svg class="site-footer__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M7.75 2h8.5C19.425 2 22 4.575 22 7.75v8.5C22 19.425 19.425 22 16.25 22h-8.5C4.575 22 2 19.425 2 16.25v-8.5C2 4.575 4.575 2 7.75 2zm0 1.75A4.005 4.005 0 0 0 3.75 7.75v8.5a4.005 4.005 0 0 0 4 4h8.5a4.005 4.005 0 0 0 4-4v-8.5a4.005 4.005 0 0 0-4-4h-8.5zM17.5 5.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5z"></path>
+          </svg>
+        </a>
         <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
       </nav>
     </div>

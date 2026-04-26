@@ -1,6 +1,32 @@
 ---
 layout: default
 ---
+{% if page.permalink == '/about/' %}
+<article class="about">
+  <header class="about-hero">
+    <h1 class="about-hero__title">{{ page.about_hero_title | default: "Sobre mí" }}</h1>
+  </header>
+
+  <section class="about-top">
+    <figure class="about-photo">
+      <img
+        src="{{ page.about_image | default: '/assets/images/me.webp' | relative_url }}"
+        alt="{{ page.about_image_alt | default: page.title }}"
+      >
+    </figure>
+
+    <div class="about-panel about-panel--lead">
+      {% if page.about_intro_title %}
+        <h2 class="about-panel__title">{{ page.about_intro_title }}</h2>
+      {% endif %}
+      <div class="about-panel__divider" aria-hidden="true"></div>
+      <div class="about-panel__text">
+        {{ content }}
+      </div>
+    </div>
+  </section>
+</article>
+{% else %}
 <article class="page">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
@@ -9,3 +35,4 @@ layout: default
     {{ content }}
   </div>
 </article>
+{% endif %}
