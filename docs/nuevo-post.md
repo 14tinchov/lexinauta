@@ -85,6 +85,7 @@ Las reglas viven bajo `.post-content` en `assets/css/style.css`. Referencia ráp
 | `##` y `###` | Títulos con tipografía display (h2 con borde inferior grueso). |
 | `> …` | Caja tipo callout neo-brutalista (no es solo una cita gris). |
 | `![alt](ruta)` | Imagen a ancho útil, borde y sombra. |
+| Include `carousel.html` / bloque `.lex-carousel` | Galería en carrusel con modal al hacer click (ver sección más abajo). |
 | `[texto](url)` | Enlace con color primario, subrayado grueso y hover. |
 | `-` / `1.` | Listas con sangría y márgenes coherentes. |
 | `` `código` `` y bloques ` ``` ` | Monoespaciado; los `pre` con borde, sombra y scroll horizontal. |
@@ -178,6 +179,34 @@ Estructura recomendada para assets:
 - `assets/images/posts/mi-post/cover.webp`
 - `assets/images/posts/mi-post/imagen-01.webp`
 - `assets/images/posts/mi-post/imagen-02.webp`
+
+### Carrusel de imágenes (galería + modal)
+
+Para agrupar muchas fotos en un solo bloque (con flechas, contador y click para ver grande en un modal), podés:
+
+1. **Include + front matter** — definís un array en el YAML del post y en el cuerpo llamás al include:
+
+{% raw %}
+```yaml
+mi_galeria:
+  - src: "/assets/images/posts/mi-post/paso-01.webp"
+    alt: "Primer paso del proceso"
+  - src: "/assets/images/posts/mi-post/paso-02.webp"
+    alt: "Segundo paso"
+```
+
+En el cuerpo del post (Jekyll procesa Liquid antes del Markdown), una línea como:
+
+```liquid
+{% include carousel.html slides=page.mi_galeria %}
+```
+{% endraw %}
+
+Varias galerías en el mismo post: usá nombres distintos en el front matter (por ejemplo `page.galeria_taller`, `page.galeria_resultado`) y un `{% include carousel.html slides=... %}` por cada una.
+
+2. **HTML en el Markdown** — mismo resultado sin Liquid: un `div.lex-carousel` con `data-lex-carousel`, viewport, track y un `figure.lex-carousel__slide` por imagen (cada uno con un `img` con `src` y `alt`). Si no querés escribir todo a mano, el include `_includes/carousel.html` genera ese HTML.
+
+Las imágenes sueltas con `![alt](ruta)` siguen igual que siempre; el carrusel solo aplica donde usés este marcado.
 
 ### Tablas, tachado y separador
 

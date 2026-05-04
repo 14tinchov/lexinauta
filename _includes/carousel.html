@@ -1,0 +1,32 @@
+{% comment %}
+  Carrusel de imágenes (el script en assets/js/lex-carousel.js lo activa).
+
+  Uso en el Markdown del post (con array en el front matter):
+
+    {% include carousel.html slides=page.mi_galeria %}
+
+  Front matter de ejemplo:
+
+    mi_galeria:
+      - src: "/assets/images/posts/mi-post/01.webp"
+        alt: "Descripción de la primera foto"
+      - src: "/assets/images/posts/mi-post/02.webp"
+        alt: "Segunda foto"
+
+  Podés tener varias galerías con distintos nombres (p. ej. page.galeria_obra, page.galeria_detalles).
+{% endcomment %}
+{% if include.slides and include.slides.size > 0 %}
+<div class="lex-carousel" data-lex-carousel>
+  <div class="lex-carousel__viewport">
+    <div class="lex-carousel__track">
+      {% for s in include.slides %}
+      <figure class="lex-carousel__slide">
+        {% assign _src = s.src %}
+        {% assign _alt = s.alt | default: s.alt_text | default: "" %}
+        <img src="{{ _src | relative_url }}" alt="{{ _alt | xml_escape }}" loading="lazy" decoding="async">
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}

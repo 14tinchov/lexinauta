@@ -53,7 +53,7 @@ title: Inicio
         </div>
         <div class="post-card__body">
           <div class="post-card__meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%m/%Y" }}</time>
+            <time class="post-card__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%m/%Y" }}</time>
           </div>
           <h2 class="post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
           {% if post.excerpt %}
@@ -76,7 +76,7 @@ title: Inicio
         </div>
         <div class="post-card__body">
           <div class="post-card__meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%m/%Y" }}</time>
+            <time class="post-card__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%m/%Y" }}</time>
           </div>
           <h2 class="post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
           {% if post.excerpt %}
