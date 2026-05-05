@@ -215,20 +215,19 @@
       var current = index + 1;
       var compact = current + " / " + n;
       terminalText.textContent = "SYSTEM_LOG // IMAGE: " + pad2(current) + "/" + pad2(n);
-      badge.textContent = current + "/ " + n;
+      badge.textContent = current + "/" + n;
       mobileCounter.textContent = compact;
       dCounter.textContent = compact;
     }
 
     function setBtnState() {
-      var atStart = index <= 0;
-      var atEnd = index >= n - 1;
-      btnPrevDesktop.disabled = atStart;
-      btnNextDesktop.disabled = atEnd;
-      btnPrevMobile.disabled = atStart;
-      btnNextMobile.disabled = atEnd;
-      dPrev.disabled = atStart;
-      dNext.disabled = atEnd;
+      var locked = n <= 1;
+      btnPrevDesktop.disabled = locked;
+      btnNextDesktop.disabled = locked;
+      btnPrevMobile.disabled = locked;
+      btnNextMobile.disabled = locked;
+      dPrev.disabled = locked;
+      dNext.disabled = locked;
     }
 
     function applyTrackTransform() {
@@ -257,13 +256,12 @@
     }
 
     function go(delta, fromDialog) {
-      var next = index + delta;
-      if (next < 0 || next >= n) return;
-      index = next;
+      if (n <= 1) return;
+      index = (index + delta + n) % n;
       applyTrackTransform();
       updateCounter();
       setBtnState();
-      if (fromDialog && dialog.open) {
+      if (dialog.open) {
         syncDialogImage();
       }
     }
